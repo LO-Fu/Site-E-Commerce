@@ -20,14 +20,14 @@ class Model{
 		}
 	}
 
-	public static function selectAll()
+	/*public static function selectAll()
     {
     	$table_name=static::$object;
     	$class_name='Model'.ucfirst($table_name);
         $rep = $pdo->query("SELECT * FROM ".$table_name);
         $rep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         return $rep->fetchAll();
-    }
+    }*/
 }
 
 Model::Init();
