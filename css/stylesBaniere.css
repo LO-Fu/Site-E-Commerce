@@ -9,13 +9,7 @@
 .img_baniere {
   width: 900px;
   height: 200px;
-  position:absolute;
-}
-
-.visible {
-  opacity: 1;
-}
-
-.cachee {
-  opacity: 0;
+display: block;
+margin-left: auto;
+    margin-right: auto;
 }
