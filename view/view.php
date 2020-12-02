@@ -1,14 +1,5 @@
 <?php
-  $num_baniere = rand(1,6);
   $fleur = isset($_GET['fleur']) ? $_GET['fleur'] : "rose";
-  /*  remarque PHP : la structure "ternaire" ci-dessus
-      est exactement équivalente au code suivant :
-    if (isset($_GET['fleur'])) {
-      $fleur = $_GET['fleur'];
-    } else {
-      $fleur = "rose";
-    }
-  */
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,23 +7,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../img/icones/fleur.ico" rel="icon" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="../css/stylesDivers.css">
-    <link rel="stylesheet" type="text/css" href="../css/stylesBaniere.css">
-    <link rel="stylesheet" type="text/css" href="../css/stylesMenu.css">
-    <link rel="stylesheet" type="text/css" href="../css/stylesGalerie.css">
+    <link rel="stylesheet" type="text/css" href="../site-e-commerce/css/stylesDivers.css">
+    <link rel="stylesheet" type="text/css" href="../site-e-commerce/css/stylesBaniere.css">
+    <link rel="stylesheet" type="text/css" href="../site-e-commerce/css/stylesMenu.css">
+    <link rel="stylesheet" type="text/css" href="../site-e-commerce/css/stylesGalerie.css">
         <title><?php echo $pagetitle; ?></title>
     </head>
     <body>
     	<header>
         <div id="baniere">
-            <img id="1" class="img_baniere visible" alt="baniere" src="../img/baniere/baniere<?php echo $num_baniere; ?>.jpg">
+            <img class="img_baniere" alt="baniere" src="../site-e-commerce/img/baniere/baniere1.jpg">
         </div>
         <nav>
           <ul>
-            <li><a href="index.php?fleur=rose">rose</a></li>
-            <li><a href="index.php?fleur=hortensia">hortensia</a></li>
-            <li><a href="index.php?fleur=fruitier">fruitier</a></li>
-            <li><a href="index.php?fleur=autre">autre</a></li>
+            <li><a href="index.php?controller=accueil&action=readAll">Accueil</a></li>
+            <li><a href="index.php?controller=fleur&action=readAll">Produits</a></li>
+            <li><a href="index.php?controller=contact&action=readAll">Contact</a></li>
           </ul>
         </nav>
       </header>
@@ -43,8 +33,8 @@
 		require $filepath;
 		?>
 		<footer>
-        <p>PHP 2020</p>
-        <p>Site E-Commerce de Floralys</p>
+        <p style="border: 1px solid black;">PHP 2020</p>
+        <p style="border: 1px solid black;">Site E-Commerce de Floralys</p>
       </footer>
     </body>
 </html>
