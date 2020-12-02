@@ -1,6 +1,5 @@
 <?php
-require_once File::build_path(array("controller","ControllerVoiture.php"));
-require_once File::build_path(array("controller","ControllerUtilisateur.php"));
+require_once File::build_path(array("controller","ControllerFleur.php"));
 if (isset($_GET['controller']) )$controller = $_GET['controller'];
 $controller_class="Controller".ucfirst($controller);
 if (class_exists($controller_class)){
