@@ -31,7 +31,7 @@ class ControllerFleur {
     public static function update(){
         $controller='fleur';
         $p = $_GET['couleur']['variete'];
-        $f = ModelVoiture::getFleurByCV($p[0], $p[1]);
+        $f = ModelFleur::getFleurByCV($p[0], $p[1]);
         $pagetitle="Modification de voitures";
         $view='update';
         require File::build_path(array("view","view.php"));
