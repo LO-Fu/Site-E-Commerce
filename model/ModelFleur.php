@@ -22,7 +22,7 @@ class ModelFleur extends Model
 
     public static function getFleurByCV($couleur, $variete)
     {
-        $sql = "SELECT * from voiture WHERE variete=:var AND couleur=:coul";
+        $sql = "SELECT * from fleur WHERE variete=:var AND couleur=:coul";
         $req_prep = Model::$pdo->prepare($sql);
 
         $values = array(
