@@ -13,7 +13,7 @@ $g3=htmlspecialchars($g3);
         <legend>Mon formulaire :</legend>
         <p>
             <label for="var_id">Variete</label> :
-            <input type="text" value="<?php echo $g1 ?>" name="var" id="var_id" readonly/>
+            <input type="text" value="<?php echo $g1 ?>" name="variete" id="var_id" readonly/>
         </p>
         <p>
             <label for="couleur_id">Couleur</label> :

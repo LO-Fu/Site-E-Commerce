@@ -44,7 +44,7 @@ class ControllerFleur {
         $view='updated';
         $pagetitle="Fleur mise à jour";
         var_dump($_GET);
-        $f=Array(htmlspecialchars($fleur->get('variete')), htmlspecialchars($fleur->get('couleur')));
+        $f=Array(htmlspecialchars($_GET['variete']), htmlspecialchars($_GET['couleur']));
         require File::build_path(array("view","view.php"));
     }
 }
