@@ -4,6 +4,9 @@ require_once File::build_path(array("model","Model.php"));
 class ModelFleur extends Model
 {
 
+    protected static $object='fleur';
+    protected static $primary='variete';
+    protected static $secondary='couleur';
     private $variete;
     private $couleur;
     private $prix;
