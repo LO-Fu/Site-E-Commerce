@@ -35,4 +35,15 @@ class ControllerFleur {
         $view='update';
         require File::build_path(array("view","view.php"));
     }
+
+    public static function updated(){
+        $voiture = new ModelFleur($_GET['marque'],$_GET['couleur'],$_GET['immat']);
+        ModelVoiture::update($voiture);
+        $controller='voiture';
+        $view='updated';
+        $pagetitle="Voiture mise à jour";
+        $p=$_GET["immat"];
+        $p=htmlspecialchars($p);
+        require File::build_path(array("view","view.php"));
+    }
 }

@@ -8,7 +8,7 @@ $g3=htmlspecialchars($g3);
 <!DOCTYPE html>
 <html>
 <body>
-<form method="get" action="index.php?controller=fleur&action=updated">
+<form method="get" action="index.php">
     <fieldset>
         <legend>Mon formulaire :</legend>
         <p>

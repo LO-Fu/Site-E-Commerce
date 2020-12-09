@@ -60,4 +60,20 @@ class ModelFleur extends Model
         $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelFleur');
         return $rep->fetchAll();
     }
+
+    public static function update($data){
+        try{
+            $sql = "UPDATE fleur SET prix =:prix WHERE `fleur`.`variete`=:variete AND `fleur`.`couleur`=:couleur";
+            $req_prep = Model::$pdo->prepare($sql);
+
+            $values = array(
+                ":prix" => $data->prix,
+                ":variete" => $data->variete,
+                ":couleur" => $data->couleur,);
+            $req_prep->execute($values);
+        }catch(PDOException $e) {
+            echo $e->getMessage(); // affiche un message d'erreur
+            die();
+        }
+    }
 }
