@@ -28,6 +28,22 @@ class ControllerFleur {
             } 
     }
 
+    public static function create(){
+        $controller='fleur';
+        $view='create';
+        $pagetitle="Création de fleur";
+        require File::build_path(array("view","view.php"));
+    }
+
+    public static function created(){
+        $fleur = new ModelVoiture($_GET['variete'],$_GET['couleur'],$_GET['prix']);
+        $fleur->save();
+        $controller= static::$object;
+        $view='created';
+        $pagetitle="Fleur créée";
+        require File::build_path(array("view","view.php"));
+    }
+
     public static function update(){
         $controller='fleur';
         $f = ModelFleur::getFleurByCV($_GET['couleur'], $_GET['variete']);

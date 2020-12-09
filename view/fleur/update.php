@@ -13,11 +13,11 @@ $g3=htmlspecialchars($g3);
         <legend>Mon formulaire :</legend>
         <p>
             <label for="var_id">Variete</label> :
-            <input type="text" value="<?php echo $g1 ?>" name="variete" id="var_id" readonly/>
+            <input type="text" value="<?php echo $g1 ?>" name="variete" id="var_id" <?php if ($view == 'update')echo "readonly"; else echo "require"?>/>
         </p>
         <p>
             <label for="couleur_id">Couleur</label> :
-            <input type="text" value="<?php echo $g2 ?>" name="couleur" id="couleur_id" readonly/>
+            <input type="text" value="<?php echo $g2 ?>" name="couleur" id="couleur_id" <?php if ($view == 'update')echo "readonly"; else echo "require"?>/>
         </p>
         <p>
             <label for="prix_id">Prix</label> :
@@ -25,8 +25,8 @@ $g3=htmlspecialchars($g3);
         </p>
         <p>
             <input type="submit" value="Envoyer" />
-            <input type='hidden' name='controller' value='fleur'/>
-            <input type='hidden' name='action' value='updated'/>
+            <input type='hidden' name='controller' value=static::$object/>
+            <input type='hidden' name='action' value="<?php if ($view == 'update')echo "updated"; else echo "created"?>"/>
         </p>
     </fieldset>
 </form>

@@ -6,7 +6,7 @@ class ModelFleur extends Model
 
     protected static $object='fleur';
     protected static $primary='variete';
-    protected static $secondary='couleur';
+    protected static $primarybis='couleur';
     private $variete;
     private $couleur;
     private $prix;
