@@ -1,5 +1,4 @@
 <?php
-$f = ModelFleur::getFleurByCV($_GET['couleur'], $_GET['variete']);
 $g3=$f->get('prix');
 $g1=htmlspecialchars($_GET['variete']);
 $g2=htmlspecialchars($_GET['couleur']);
