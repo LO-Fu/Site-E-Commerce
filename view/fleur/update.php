@@ -25,7 +25,7 @@ $g3=htmlspecialchars($g3);
         </p>
         <p>
             <input type="submit" value="Envoyer" />
-            <input type='hidden' name='controller' value=static::$object/>
+            <input type='hidden' name='controller' value='fleur'/>
             <input type='hidden' name='action' value="<?php if ($view == 'update')echo "updated"; else echo "created"?>"/>
         </p>
     </fieldset>
