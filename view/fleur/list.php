@@ -9,7 +9,7 @@
 
         $f=$gv.$gc;
 
-        echo "<p> Fleur de la variété $gv1 et de couleur $gc1, Prix : $gp1 €</p>";
-        echo "<img class='img_fleur' src='../site-e-commerce/img/fleurs/$gv/$f.jpg' />";
+        echo "<div><p> Fleur de la variété $gv1 et de couleur $gc1, Prix : $gp1 €</p>";
+        echo "<img class='img_galerie' src='../site-e-commerce/img/fleurs/$gv/$f.jpg' /></div>";
     }
     ?>
