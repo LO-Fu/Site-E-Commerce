@@ -20,7 +20,27 @@ class ModelFleur extends Model
         }
     }
 
-    // Getter générique
+    public static function getFleurByCV($couleur, $variete)
+    {
+        $sql = "SELECT * from voiture WHERE variete=:var AND couleur=:coul";
+        $req_prep = Model::$pdo->prepare($sql);
+
+        $values = array(
+            "var" => $variete,
+            "coul" => $couleur
+        );
+
+        $req_prep->execute($values);
+
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelFleur');
+        $tab_fleur= $req_prep->fetchAll();
+        // Careful: you should handle the special case of no results
+        if (empty($tab_fleur))
+            return false;
+        return $tab_fleur[0];
+
+    }
+
     public function get($nom_attribut) {
         if (property_exists($this, $nom_attribut))
             return $this->$nom_attribut;
