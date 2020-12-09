@@ -37,13 +37,12 @@ class ControllerFleur {
     }
 
     public static function updated(){
-        $voiture = new ModelFleur($_GET['marque'],$_GET['couleur'],$_GET['immat']);
-        ModelVoiture::update($voiture);
-        $controller='voiture';
+        $fleur = new ModelFleur($_GET['variete'],$_GET['couleur'],$_GET['prix']);
+        ModelFleur::update($fleur);
+        $controller='fleur';
         $view='updated';
-        $pagetitle="Voiture mise à jour";
-        $p=$_GET["immat"];
-        $p=htmlspecialchars($p);
+        $pagetitle="Fleur mise à jour";
+        $f=Array(htmlspecialchars($_GET["variete"]), htmlspecialchars($_GET['couleur']));
         require File::build_path(array("view","view.php"));
     }
 }
