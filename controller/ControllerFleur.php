@@ -45,7 +45,8 @@ class ControllerFleur {
 
     public static function update(){
         $controller='fleur';
-        $f = ModelFleur::select($_GET['id']);
+        $idFleur = $_GET['id'];
+        $f = ModelFleur::select($idFleur);
         $pagetitle="Modification de fleur";
         $view='update';
         require File::build_path(array("view","view.php"));

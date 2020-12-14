@@ -64,13 +64,14 @@ class ModelFleur extends Model
 
     public static function update($data){
         try{
-            $sql = "UPDATE fleur SET prix =:prix WHERE `fleur`.`variete`=:variete AND `fleur`.`couleur`=:couleur";
+            $sql = "UPDATE fleur SET prix =:prix AND variete=:variete AND couleur=:couleur WHERE id=:id";
             $req_prep = Model::$pdo->prepare($sql);
 
             $values = array(
+                ":id" => $data->id,
                 ":prix" => $data->prix,
                 ":variete" => $data->variete,
-                ":couleur" => $data->couleur,);
+                ":couleur" => $data->couleur);
             $req_prep->execute($values);
         }catch(PDOException $e) {
             echo $e->getMessage(); // affiche un message d'erreur
