@@ -14,10 +14,9 @@ class ControllerFleur {
 
     public static function read(){
         $controller='fleur';
-    	$p1 = $_GET['variete'];
-    	$p2 = $_GET['couleur'];
-    	$v = ModelFleur::select($p1,$p2);
-        $pagetitle=$p1.$p2;
+    	$idFleur = $_GET['id'];
+    	$v = ModelFleur::select($idFleur);
+        $pagetitle=$idFleur;
     	if($v==NULL) {
             $view='error';
             require File::build_path(array("view","view.php"));
@@ -46,14 +45,14 @@ class ControllerFleur {
 
     public static function update(){
         $controller='fleur';
-        $f = ModelFleur::getFleurByCV($_GET['couleur'], $_GET['variete']);
-        $pagetitle="Modification de voitures";
+        $f = ModelFleur::select($_GET['id']);
+        $pagetitle="Modification de fleur";
         $view='update';
         require File::build_path(array("view","view.php"));
     }
 
     public static function updated(){
-        $fleur = new ModelFleur($_GET['variete'],$_GET['couleur'],$_GET['prix']);
+        $fleur = new ModelFleur($_GET['id'], $_GET['variete'],$_GET['couleur'],$_GET['prix']);
         ModelFleur::update($fleur);
         $controller='fleur';
         $view='updated';

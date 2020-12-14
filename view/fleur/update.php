@@ -1,9 +1,7 @@
 <?php
-$idFleur = htmlspecialchars($_GET['id']);
-$fleur = ModelFleur::select($idFleur);
-$variete = $fleur::get('variete');
-$couleur = $fleur::get('couleur');
-$prix = $fleur::get('prix');
+$variete = htmlspecialchars($f::get('variete'));
+$couleur = htmlspecialchars($f::get('couleur'));
+$prix = htmlspecialchars($f::get('prix'));
 ?>
 
 <!DOCTYPE html>
