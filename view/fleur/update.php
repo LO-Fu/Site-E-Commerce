@@ -1,8 +1,9 @@
 <?php
-$g3=$f->get('prix');
-$g1=htmlspecialchars($_GET['variete']);
-$g2=htmlspecialchars($_GET['couleur']);
-$g3=htmlspecialchars($g3);
+$idFleur = htmlspecialchars($_GET['id']);
+$fleur = ModelFleur::select($idFleur);
+$variete = $fleur::get('variete');
+$couleur = $fleur::get('couleur');
+$prix = $fleur::get('prix');
 ?>
 
 <!DOCTYPE html>
@@ -12,16 +13,20 @@ $g3=htmlspecialchars($g3);
     <fieldset>
         <legend>Mon formulaire :</legend>
         <p>
+            <label for="id">ID</label> :
+            <input type="text" value="<?php echo $idFleur ?>" name="identifiant" id="id" <?php if ($view == 'update')echo "readonly"; else echo "required"?>/>
+        </p>
+        <p>
             <label for="var_id">Variete</label> :
-            <input type="text" value="<?php echo $g1 ?>" name="variete" id="var_id" <?php if ($view == 'update')echo "readonly"; else echo "require"?>/>
+            <input type="text" value="<?php echo $variete ?>" name="variete" id="var_id" required/>
         </p>
         <p>
             <label for="couleur_id">Couleur</label> :
-            <input type="text" value="<?php echo $g2 ?>" name="couleur" id="couleur_id" <?php if ($view == 'update')echo "readonly"; else echo "require"?>/>
+            <input type="text" value="<?php echo $couleur ?>" name="couleur" id="couleur_id" required/>
         </p>
         <p>
             <label for="prix_id">Prix</label> :
-            <input type="text" value="<?php echo $g3 ?>" name="prix" id="prix_id" required />
+            <input type="text" value="<?php echo $prix ?>" name="prix" id="prix_id" required />
         </p>
         <p>
             <input type="submit" value="Envoyer" />

@@ -5,18 +5,19 @@ class ModelFleur extends Model
 {
 
     protected static $object='fleur';
-    protected static $primary='variete';
-    protected static $primarybis='couleur';
+    protected static $primary='id';
+    private $id;
     private $variete;
     private $couleur;
     private $prix;
 
-    public function __construct($v = NULL, $c = NULL, $p = NULL)
+    public function __construct($v = NULL, $c = NULL, $p = NULL, $id = NULL)
     {
-        if (!is_null($v) && !is_null($c) && !is_null($p)) {
+        if (!is_null($v) && !is_null($c) && !is_null($p) && !is_null($id)) {
             $this->variete = $v;
             $this->couleur = $c;
             $this->prix = $p;
+            $this->id = $id;
         }
     }
 
