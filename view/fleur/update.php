@@ -1,6 +1,7 @@
 <?php
 var_dump($_GET);
 var_dump($idFleur);
+var_dump($f);
 $variete = htmlspecialchars($f::get('variete'));
 $couleur = htmlspecialchars($f::get('couleur'));
 $prix = htmlspecialchars($f::get('prix'));
