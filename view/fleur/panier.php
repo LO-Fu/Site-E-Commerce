@@ -31,7 +31,7 @@
                     echo "<td>".htmlspecialchars($_SESSION['panier']['id'][$i])."</ td>";
                     echo "<td>".htmlspecialchars($_SESSION['panier']['qte'][$i])."</td>";
                     echo "<td>".htmlspecialchars($_SESSION['panier']['prix'][$i])."</td>";
-                    echo "<td><a href=\"".htmlspecialchars("index.php?controller=fleur&action=suppression&id=".rawurlencode($_SESSION['panier']['id'][$i]))."\">Supprimer</a></td>";
+                    echo "<td><a href=\"".htmlspecialchars("index.php?controller=fleur&action=supprimerArticle&id=".rawurlencode($_SESSION['panier']['id'][$i]))."\">Supprimer</a></td>";
                     echo "</tr>";
                 }
 
