@@ -72,7 +72,7 @@ class ControllerFleur {
     public static function delete(){
         ModelFleur::delete($_GET["id"]);
         $id=htmlspecialchars($_GET["id"]);
-        $fleurs=ModelVoiture::selectAll();
+        $fleurs=ModelFleur::selectAll();
         $controller=static::$object;
         $view='deleted';
         $pagetitle="Supprimer voiture";
