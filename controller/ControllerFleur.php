@@ -123,7 +123,7 @@ class ControllerFleur {
         }
     }*/
 
-    public static function ajouterArticle(){
+    public static function ajouterArticle($qte){
 
          //Si le produit existe déjà on ajoute seulement la quantité
          $positionProduit = array_search($_GET['id'],  $_SESSION['panier']['id']);
@@ -145,9 +145,8 @@ class ControllerFleur {
          }
    }
 
-   public static function modifierQte(){
-    
-         $maFleur=ModelFleur::select($_GET['id']);
+   public static function modifierQte($qte){
+
          $controller=static::$object;
         //Si la quantité est positive on modifie sinon on supprime l'article
         if ($qte > 0)
@@ -161,11 +160,13 @@ class ControllerFleur {
             }
         }
         else
-        supprimerArticle($id);
+        supprimerArticle();
    }
 
    public static function supprimerArticle($id){
 
+
+         $maFleur=ModelFleur::select($_GET['id']);
          //Nous allons passer par un panier temporaire
          $tmp=array();
          $tmp['id'] = array();
@@ -177,7 +178,7 @@ class ControllerFleur {
 
          for($i = 0; $i < count($_SESSION['panier']['id']); $i++)
          {
-            if ($_SESSION['panier']['id'][$i] !== $id)
+            if ($_SESSION['panier']['id'][$i] !== $maFleur->select($_GET['id']))
             {
                array_push( $tmp['id'],$_SESSION['panier']['id'][$i]);
                array_push( $tmp['variete'],$_SESSION['panier']['variete'][$i]);
@@ -191,6 +192,28 @@ class ControllerFleur {
          $_SESSION['panier'] =  $tmp;
          //On efface notre panier temporaire
          unset($tmp);
+   }
+
+   public static function MontantGlobal(){
+      $total=0;
+      for($i = 0; $i < count($_SESSION['panier']['id']); $i++)
+      {
+         $total += $_SESSION['panier']['qte'][$i] * $_SESSION['panier']['prix'][$i];
+      }
+      return $total;
+   }
+
+   public static function supprimePanier(){
+      unset($_SESSION['panier']);
+   }
+
+   public static function compterArticles()
+   {
+      if (isset($_SESSION['panier']))
+      return count($_SESSION['panier']['id']);
+      else
+      return 0;
+
    }
 
 }
