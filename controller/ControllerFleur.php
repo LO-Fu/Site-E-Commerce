@@ -57,8 +57,9 @@ class ControllerFleur {
         ModelFleur::update($fleur);
         $controller='fleur';
         $view='updated';
+        $action = 'readAll';
         $pagetitle="Fleur mise à jour";
         $f=Array(htmlspecialchars($_GET['variete']), htmlspecialchars($_GET['couleur']));
-        require ("index.php?controller=fleur&action=readAll");
+        require File::build_path(array("index.php"));
     }
 }
