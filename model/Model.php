@@ -70,10 +70,9 @@ class Model{
 
     public static function update($data){
         try{
-            $sql = "UPDATE `:object` SET ";
+            $sql = "UPDATE static::$object SET ";
             $pkey = static::$primary;
             $infos = get_object_vars($data);
-            $values = array(":object" => static::$object);
             foreach ($infos as $clef=> $value) {
                 if ($clef != $pkey){$sql = $sql . "$clef=:$clef, ";}
                 $values[":" . $clef] = $value;
