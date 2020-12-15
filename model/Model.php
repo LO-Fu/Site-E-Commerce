@@ -70,16 +70,17 @@ class Model{
 
     public static function update($data){
         try{
-            $infos = (array) $data;
             $sql = "UPDATE :object SET ";
             $pkey = static::$primary;
             $values = array(":object" => static::$object);
-            foreach($infos as $clef => $value){
-                $sql = $sql."$clef=:$clef, ";
-                $values[":".$clef] = $value;
+            foreach ($data as $attribute) {
+                foreach ($attribute as $clef => $value) {
+                    $sql = $sql . "$clef=:$clef, ";
+                    $values[":" . $clef] = $value;
+                }
             }
             $values[":".$pkey] = $values -> $pkey;
-            var_dump($infos);
+            var_dump($values);
             $req_prep = Model::$pdo->prepare($sql."WHERE `:object`.`$pkey`=:primary");
             $req_prep->execute($values);
 
