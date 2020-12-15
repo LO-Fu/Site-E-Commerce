@@ -22,6 +22,7 @@
           <ul>
             <li><a href="index.php?controller=accueil&action=readAll">Accueil</a></li>
             <li><a href="index.php?controller=fleur&action=readAll">Produits</a></li>
+            <li><a href="index.php?controller=utilisateur&action=readAll">Utilisateurs</a></li>
             <li><a href="index.php?controller=contact&action=readAll">Contact</a></li>
           </ul>
         </nav>

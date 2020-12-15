@@ -1,12 +1,86 @@
 <?php
 require_once File::build_path(array("model","ModelUtilisateur.php")); // chargement du modèle
 class ControllerUtilisateur {
+
+	protected static $object = 'utilisateur';
+
     public static function readAll() {
-        $controller='utilisateur';
+        $controller=static::$object;
         $view='list';
         $pagetitle="Liste d'utilisateurs";
-        $tab_v = ModelUtilisateur::getAllUtilisateurs();     //appel au modèle pour gerer la BD
+        $tab_v = ModelUtilisateur::selectAll();     //appel au modèle pour gerer la BD
         require File::build_path(array("view","view.php"));  //"redirige" vers la vue
     }
+
+    public static function read(){
+        $controller=static::$object;
+    	$p = $_GET['login'];
+    	$v = ModelUtilisateur::select($p);
+        $pagetitle=$p;
+    	if($v==NULL) {
+            $view='error';
+            require File::build_path(array("view","view.php"));
+        }
+    	else {
+            $view='detail';
+            require File::build_path(array("view","view.php"));   
+            } 
+    }
+
+    public static function delete(){
+        $p=$_GET["login"];
+        ModelUtilisateur::delete($p);
+        $p=htmlspecialchars($p);
+        $tab_v=ModelUtilisateur::selectAll();
+        $controller=static::$object;
+        $view='deleted';
+        $pagetitle="Supprimer utilisateur";
+        require File::build_path(array("view","view.php"));
+    }
+
+    public static function create(){
+        $controller=static::$object;
+        $view='update';
+        $event = "created";
+        $primaryAction = "required";
+        $pagetitle="Création de d'utilisateur";
+        $login='';
+        $u = new ModelUtilisateur();
+        require File::build_path(array("view","view.php"));
+    }
+
+    public static function created(){
+        $utilisateur = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'], $_GET['mdp']);
+        ModelUtilisateur::save($utilisateur);
+        $controller= static::$object;
+        $view='created';
+        $pagetitle="utilisateur créé";
+        $utilisateurs = ModelUtilisateur::selectAll();
+        $login = htmlspecialchars($_GET['login']);
+        require File::build_path(array("view","view.php"));
+    }
+
+    public static function update(){
+        $controller=static::$object;
+        $login = $_GET['login'];
+        $u = ModelUtilisateur::select($login);
+        $pagetitle="Modification d'utilisateur'";
+        $primaryAction = "readonly";
+        $event = "updated";
+        $view='update';
+        require File::build_path(array("view","view.php"));
+    }
+
+    public static function updated(){
+        $utilisateur = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'], $_GET['mdp']);
+        ModelUtilisateur::update($utilisateur);
+        $controller=static::$object;
+        $view='updated';
+        $pagetitle="Utilisateur mise à jour";
+        $u=Array(htmlspecialchars($_GET['variete']), htmlspecialchars($_GET['couleur']));
+        $utilisateurs = ModelUtilisateur::selectAll();
+        require File::build_path(array("view","view.php"));
+    }
+
 }
 ?>
