@@ -80,7 +80,7 @@ class Model{
                 $sql = $sql . "$clef=:$clef, ";
                 $values[":" . $clef] = $value;
             }
-            var_dump(array_pop($values));
+            var_dump($clef);
             $req_prep = Model::$pdo->prepare($sql."WHERE `:object`.`$pkey`=:$pkey");
             $req_prep->execute($values);
 
