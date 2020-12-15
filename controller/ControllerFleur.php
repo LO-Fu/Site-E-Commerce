@@ -143,6 +143,7 @@ class ControllerFleur {
             array_push( $_SESSION['panier']['qte'],1);
             array_push( $_SESSION['panier']['prix'],$maFleur->get('prix'));
          }
+         require File::build_path(array("view","fleur","panier.php"));
    }
 
    public static function modifierQte(){
