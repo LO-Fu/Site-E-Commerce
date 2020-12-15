@@ -194,4 +194,12 @@ class ControllerFleur {
          unset($tmp);
    }
 
+   public static function total(){
+        $total = 0;
+        foreach ($_SESSION['panier']['id'] as $product){
+            $total = $total + $_SESSION['panier']['qte'][key($product)]*$_SESSION['panier']['prix'][key($product)];
+        }
+        return $total;
+   }
+
 }
