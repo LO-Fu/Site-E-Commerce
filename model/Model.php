@@ -73,7 +73,6 @@ class Model{
             $sql = "UPDATE :object SET ";
             $pkey = static::$primary;
             $infos = get_object_vars($data);
-            print_r(get_object_vars($data));
             $values = array(":object" => static::$object);
             foreach ($infos as $clef=> $value) {
                 echo $clef;
@@ -81,8 +80,7 @@ class Model{
                 $sql = $sql . "$clef=:$clef, ";
                 $values[":" . $clef] = $value;
             }
-            $values[":".$pkey] = $values -> $pkey;
-            var_dump($values);
+            var_dump($sql);
             $req_prep = Model::$pdo->prepare($sql."WHERE `:object`.`$pkey`=:primary");
             $req_prep->execute($values);
 
