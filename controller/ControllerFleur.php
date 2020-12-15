@@ -123,7 +123,7 @@ class ControllerFleur {
         }
     }*/
 
-    public static function ajouterArticle($qte){
+    public static function ajouterArticle(){
 
          //Si le produit existe déjà on ajoute seulement la quantité
          $positionProduit = array_search($_GET['id'],  $_SESSION['panier']['id']);
