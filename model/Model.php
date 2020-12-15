@@ -81,7 +81,7 @@ class Model{
                 $values[":" . $clef] = $value;
             }
             var_dump($sql);
-            $req_prep = Model::$pdo->prepare($sql."WHERE `:object`.`$pkey`=:primary");
+            $req_prep = Model::$pdo->prepare($sql."WHERE `:object`.`$pkey`=:$pkey");
             $req_prep->execute($values);
 
         }catch(PDOException $e) {
