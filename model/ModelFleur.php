@@ -6,10 +6,10 @@ class ModelFleur extends Model
 
     protected static $object='fleur';
     protected static $primary='id';
-    private $id;
-    private $variete;
-    private $couleur;
-    private $prix;
+    protected $id;
+    protected $variete;
+    protected $couleur;
+    protected $prix;
 
     public function __construct($v = NULL, $c = NULL, $p = NULL, $id = NULL)
     {
