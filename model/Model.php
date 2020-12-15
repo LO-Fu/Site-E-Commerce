@@ -70,7 +70,7 @@ class Model{
 
     public static function update($data){
         try{
-            $sql = "UPDATE static::$object SET ";
+            $sql = "UPDATE ".static::$object." SET ";
             $pkey = static::$primary;
             $infos = get_object_vars($data);
             foreach ($infos as $clef=> $value) {
