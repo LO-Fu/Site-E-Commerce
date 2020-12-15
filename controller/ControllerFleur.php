@@ -33,6 +33,7 @@ class ControllerFleur {
         $event = "created";
         $primaryAction = "required";
         $pagetitle="Création de fleur";
+        $idFleur='';
         $f = new ModelFleur();
         require File::build_path(array("view","view.php"));
     }

@@ -67,6 +67,24 @@ class Model{
 
         $req_prep->execute($values);
     }
+
+    public static function update($data){
+        try{
+            $sql = "UPDATE :object SET ";
+            $values = array(":objet" => $object);
+            foreach($data as $clef => $value){
+                $sql = $sql."$clef=:$clef ";
+                $values[$clef] = $value;
+            }
+            $values[":".$primary] = $values -> $primary;
+            $req_prep = Model::$pdo->prepare($sql."WHERE `:object`.`$primary`=:primary");
+            $req_prep->execute($values);
+
+        }catch(PDOException $e) {
+            echo $e->getMessage(); // affiche un message d'erreur
+            die();
+        }
+    }
 }
 
 Model::Init();
