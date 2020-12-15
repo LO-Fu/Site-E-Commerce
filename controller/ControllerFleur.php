@@ -194,6 +194,7 @@ class ControllerFleur {
          $_SESSION['panier'] =  $tmp;
          //On efface notre panier temporaire
          unset($tmp);
+         self::printPanier();
    }
 
    public static function total(){
