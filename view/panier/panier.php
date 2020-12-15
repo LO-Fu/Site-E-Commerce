@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("fonctions-panier.php");
+include_once File::build_path(array("controller","ControllerPanier.php"));
 
 $erreur = false;
 
@@ -11,12 +11,16 @@ if($action !== null)
    $erreur=true;
 
    //récupération des variables en POST ou GET
-   $l = (isset($_POST['l'])? $_POST['l']:  (isset($_GET['l'])? $_GET['l']:null )) ;
+   $i = (isset($_POST['i'])? $_POST['i']:  (isset($_GET['i'])? $_GET['i']:null )) ;
+   $v = (isset($_POST['v'])? $_POST['v']:  (isset($_GET['v'])? $_GET['v']:null )) ;
+   $c = (isset($_POST['c'])? $_POST['c']:  (isset($_GET['c'])? $_GET['c']:null )) ;
    $p = (isset($_POST['p'])? $_POST['p']:  (isset($_GET['p'])? $_GET['p']:null )) ;
    $q = (isset($_POST['q'])? $_POST['q']:  (isset($_GET['q'])? $_GET['q']:null )) ;
 
    //Suppression des espaces verticaux
-   $l = preg_replace('#\v#', '',$l);
+   $i = preg_replace('#\v#', '',$i);
+   $v = preg_replace('#\v#', '',$v);
+   $c = preg_replace('#\v#', '',$c);
    //On vérifie que $p est un float
    $p = floatval($p);
 
@@ -37,11 +41,11 @@ if($action !== null)
 if (!$erreur){
    switch($action){
       Case "ajout":
-         ajouterArticle($l,$q,$p);
+         ajouterArticle($i,$v,$c,$q,$p);
          break;
 
       Case "suppression":
-         supprimerArticle($l);
+         supprimerArticle($i);
          break;
 
       Case "refresh" :
@@ -56,9 +60,9 @@ if (!$erreur){
    }
 }
 
-echo '<?xml version="1.0" encoding="utf-8"?>';?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+//echo '<?xml version="1.0" encoding="utf-8"?>';?>
+<!DOCTYPE html>
+<html>
 <head>
 <title>Votre panier</title>
 </head>
@@ -91,7 +95,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>';?>
              echo "<td>".htmlspecialchars($_SESSION['panier']['id'][$i])."</ td>";
              echo "<td><input type=\"text\" size=\"4\" name=\"q[]\" value=\"".htmlspecialchars($_SESSION['panier']['qte'][$i])."\"/></td>";
              echo "<td>".htmlspecialchars($_SESSION['panier']['prix'][$i])."</td>";
-             echo "<td><a href=\"".htmlspecialchars("panier.php?action=suppression&l=".rawurlencode($_SESSION['panier']['id'][$i]))."\">XX</a></td>";
+             echo "<td><a href=\"".htmlspecialchars("panier.php?action=suppression&i=".rawurlencode($_SESSION['panier']['id'][$i]))."\">XX</a></td>";
              echo "</tr>";
           }
 

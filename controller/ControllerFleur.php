@@ -122,4 +122,75 @@ class ControllerFleur {
             }
         }
     }*/
+
+    public static function ajouterArticle(){
+
+         //Si le produit existe déjà on ajoute seulement la quantité
+         $positionProduit = array_search($_GET['id'],  $_SESSION['panier']['id']);
+         $maFleur=ModelFleur::select($_GET['id']);
+         $controller=static::$object;
+
+         if ($positionProduit !== false)
+         {
+            $_SESSION['panier']['qte'][$positionProduit] += 1 ;
+         }
+         else
+         {
+            //Sinon on ajoute le produit
+            array_push( $_SESSION['panier']['id'],$maFleur->get('id'));
+            array_push( $_SESSION['panier']['variete'],$maFleur->get('variete'));
+            array_push( $_SESSION['panier']['couleur'],$maFleur->get('couleur'));
+            array_push( $_SESSION['panier']['qte'],1);
+            array_push( $_SESSION['panier']['prix'],$maFleur->get('prix'));
+         }
+   }
+
+   public static function modifierQte(){
+    
+         $maFleur=ModelFleur::select($_GET['id']);
+         $controller=static::$object;
+        //Si la quantité est positive on modifie sinon on supprime l'article
+        if ($qte > 0)
+        {
+            //Recharche du produit dans le panier
+            $positionProduit = array_search($_GET['id'],  $_SESSION['panier']['id']);
+
+            if ($positionProduit !== false)
+            {
+               $_SESSION['panier']['qte'][$positionProduit] = $qte ;
+            }
+        }
+        else
+        supprimerArticle($id);
+   }
+
+   public static function supprimerArticle($id){
+
+         //Nous allons passer par un panier temporaire
+         $tmp=array();
+         $tmp['id'] = array();
+         $tmp['variete'] = array();
+         $tmp['couleur'] = array();
+         $tmp['qte'] = array();
+         $tmp['prix'] = array();
+         $tmp['lock'] = $_SESSION['panier']['lock'];
+
+         for($i = 0; $i < count($_SESSION['panier']['id']); $i++)
+         {
+            if ($_SESSION['panier']['id'][$i] !== $id)
+            {
+               array_push( $tmp['id'],$_SESSION['panier']['id'][$i]);
+               array_push( $tmp['variete'],$_SESSION['panier']['variete'][$i]);
+               array_push( $tmp['couleur'],$_SESSION['panier']['couleur'][$i]);
+               array_push( $tmp['qte'],$_SESSION['panier']['qte'][$i]);
+               array_push( $tmp['prix'],$_SESSION['panier']['prix'][$i]);
+            }
+
+         }
+         //On remplace le panier en session par notre panier temporaire à jour
+         $_SESSION['panier'] =  $tmp;
+         //On efface notre panier temporaire
+         unset($tmp);
+   }
+
 }

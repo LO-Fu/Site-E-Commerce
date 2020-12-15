@@ -1,5 +1,7 @@
 <?php
 require_once File::build_path(array("controller", "ControllerFleur.php"));
+require_once File::build_path(array("controller", "ControllerPanier.php"));
+
 if (isset($_GET['controller'])) $controller = $_GET['controller'];
 else{
     $controller = 'fleur';
