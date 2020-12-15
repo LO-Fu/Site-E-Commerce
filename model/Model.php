@@ -76,7 +76,7 @@ class Model{
                 if ($clef != $pkey){$sql = $sql . "$clef=:$clef, ";}
                 $values[":" . $clef] = $value;
             }
-            $sql = substr($sql, 0, -2)." WHERE $pkey=:$pkey";
+            $sql = rtrim($sql, " ,")." WHERE $pkey=:$pkey";
             $req_prep = Model::$pdo->prepare($sql);
             $req_prep->execute($values);
 
@@ -93,8 +93,8 @@ class Model{
                 $corps = $corps .':'.$clef.',';
                 $values[":" . $clef] = $value;
             }
-            $corps = substr($corps, 0, -1).")";
-            $in = rtrim($corps, ":");
+            $corps = rtrim($corps,",").")";
+            $in = str_replace(':','',$corps);
             $sql = "INSERT INTO ".static::$object.$in." VALUES".$corps;
             var_dump($in);
             $req_prep = Model::$pdo->prepare($sql);
