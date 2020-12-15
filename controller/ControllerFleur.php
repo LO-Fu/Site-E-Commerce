@@ -53,7 +53,7 @@ class ControllerFleur {
     }
 
     public static function updated(){
-        $fleur = new ModelFleur($_GET['id'], $_GET['variete'],$_GET['couleur'],$_GET['prix']);
+        $fleur = new ModelFleur($_GET['identifiant'], $_GET['variete'],$_GET['couleur'],$_GET['prix']);
         ModelFleur::update($fleur);
         $controller='fleur';
         $view='updated';
