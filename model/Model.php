@@ -85,6 +85,28 @@ class Model{
             die();
         }
     }
+
+    public static function save($data){
+        try{
+            $corps = " (";
+            foreach ($data as $clef=> $value) {
+                $corps = $corps .':'.$clef.',';
+                $values[":" . $clef] = $value;
+            }
+            $corps = substr($sql, 0, -1).")";
+            $in = rtrim($corps, ":");
+            $sql = "INSERT INTO ".static::$object.$in." VALUES".$corps;
+            var_dump($sql);
+            $req_prep = Model::$pdo->prepare($sql);
+            $req_prep->execute($values);
+
+        }catch(PDOException $e) {
+            echo $e->getMessage(); // affiche un message d'erreur
+            die();
+        }
+    }
+
+
 }
 
 Model::Init();
