@@ -80,4 +80,46 @@ class ControllerFleur {
         $pagetitle="Supprimer voiture";
         require File::build_path(array("view","view.php"));
     }
+
+    /*public static function addCart(){
+        if(!isset($_REQUEST['panier'])) echo 'lol1';
+        else{
+            $bool=false;
+
+            if (!isset($_SESSION['cart'])) $_SESSION = array();
+            $params['id']= $_REQUEST['panier']['id'];
+            $fleur= ModelFleur::select($params);
+            if(!$fleur) echo 'lol2';
+            else {
+                $fleurToAdd= array($_REQUEST['panier'],1);
+                if (empty($_SESSION['cart'])){
+                    array_push($_SESSION, $fleurToAdd);
+                    $bool=true;
+                }
+                else{
+                    foreach ($_SESSION['cart'] as $key => $value) {
+                        if($value[0] == $_REQUEST['panier']) {
+                            if (isset($_REQUEST['qte'])){
+                                if ($_REQUEST['qte']<=0){
+                                    array_slice($_SESSION, $key, 1);
+                                }
+                                else{
+                                    $_SESSION['cart'][$key][1] = $_REQUEST['qte'];
+                                }
+                            }
+                            else{
+                                $_SESSION['cart'][$key][1]++;
+                            }
+                            $bool=true;
+                        }
+                    }
+                }
+            }
+            if (!$bool){
+                array_push($_SESSION, $fleurToAdd);
+
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            }
+        }
+    }*/
 }
