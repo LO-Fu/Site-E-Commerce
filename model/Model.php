@@ -80,7 +80,7 @@ class Model{
                 $sql = $sql . "$clef=:$clef, ";
                 $values[":" . $clef] = $value;
             }
-            $sql = substr($sql, 0, -1);
+            $sql = substr($sql, 0, -2);
             $req_prep = Model::$pdo->prepare($sql." WHERE `:object`.`$pkey`=:$pkey");
             $req_prep->execute($values);
 
