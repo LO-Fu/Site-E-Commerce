@@ -12,7 +12,7 @@ $prix = htmlspecialchars($f->get('prix'));
         <legend>Mon formulaire :</legend>
         <p>
             <label for="id">ID</label> :
-            <input type="text" value="<?php echo $idFleur ?>" name="identifiant" id="id" <?php if ($view == 'update')echo "readonly"; else echo "required"?>/>
+            <input type="text" value="<?php echo $idFleur ?>" name="identifiant" id="id" <?php echo $primaryAction ?>/>
         </p>
         <p>
             <label for="var_id">Variete</label> :
@@ -29,7 +29,7 @@ $prix = htmlspecialchars($f->get('prix'));
         <p>
             <input type="submit" value="Envoyer" />
             <input type='hidden' name='controller' value='fleur'/>
-            <input type='hidden' name='action' value="<?php if ($view == 'update')echo "updated"; else echo "created"?>"/>
+            <input type='hidden' name='action' value="<?php echo $view. 'd'?>"/>
         </p>
     </fieldset>
 </form>
