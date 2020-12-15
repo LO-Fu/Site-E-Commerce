@@ -5,7 +5,7 @@ class ControllerFleur {
 	protected static $object = 'fleur';
 
 	public static function readAll() {
-        $controller='fleur';
+        $controller=static::$object;
         $view='list';
         $pagetitle='Liste de fleurs';
         $fleurs = ModelFleur::selectAll();     //appel au modèle pour gerer la BD
@@ -13,7 +13,7 @@ class ControllerFleur {
     }
 
     public static function read(){
-        $controller='fleur';
+        $controller=static::$object;
     	$idFleur = $_GET['id'];
     	$v = ModelFleur::select($idFleur);
         $pagetitle=$idFleur;
@@ -28,7 +28,7 @@ class ControllerFleur {
     }
 
     public static function create(){
-        $controller='fleur';
+        $controller=static::$object;
         $view='update';
         $event = "created";
         $primaryAction = "required";
@@ -48,7 +48,7 @@ class ControllerFleur {
     }
 
     public static function update(){
-        $controller='fleur';
+        $controller=static::$object;
         $idFleur = $_GET['id'];
         $f = ModelFleur::select($idFleur);
         $pagetitle="Modification de fleur";
@@ -61,11 +61,21 @@ class ControllerFleur {
     public static function updated(){
         $fleur = new ModelFleur($_GET['variete'],$_GET['couleur'],$_GET['prix'], $_GET['identifiant']);
         ModelFleur::update($fleur);
-        $controller='fleur';
+        $controller=static::$object;
         $view='updated';
         $pagetitle="Fleur mise à jour";
         $f=Array(htmlspecialchars($_GET['variete']), htmlspecialchars($_GET['couleur']));
         $fleurs = ModelFleur::selectAll();
+        require File::build_path(array("view","view.php"));
+    }
+
+    public static function delete(){
+        ModelFleur::delete($_GET["id"]);
+        $id=htmlspecialchars($_GET["id"]);
+        $fleurs=ModelVoiture::selectAll();
+        $controller=static::$object;
+        $view='deleted';
+        $pagetitle="Supprimer voiture";
         require File::build_path(array("view","view.php"));
     }
 }

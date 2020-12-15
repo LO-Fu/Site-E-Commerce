@@ -96,7 +96,6 @@ class Model{
             $corps = rtrim($corps,",").")";
             $in = str_replace(':','',$corps);
             $sql = "INSERT INTO ".static::$object.$in." VALUES".$corps;
-            var_dump($in);
             $req_prep = Model::$pdo->prepare($sql);
             $req_prep->execute($values);
 
