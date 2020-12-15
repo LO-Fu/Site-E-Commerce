@@ -147,9 +147,9 @@ class ControllerFleur {
         require File::build_path(array("view","view.php"));
    }
 
-   public static function modifierQte($qte){
-
-         $controller=static::$object;
+   public static function modifierQte(){
+        $qte = $_GET['qte'];
+        $controller=static::$object;
         //Si la quantité est positive on modifie sinon on supprime l'article
         if ($qte > 0)
         {
@@ -162,13 +162,13 @@ class ControllerFleur {
             }
         }
         else
-        supprimerArticle();
+            self::supprimerArticle();
    }
 
-   public static function supprimerArticle($id){
+   public static function supprimerArticle(){
 
 
-         $maFleur=ModelFleur::select($_GET['id']);
+         $id = $_GET['id'];
          //Nous allons passer par un panier temporaire
          $tmp=array();
          $tmp['id'] = array();
@@ -180,7 +180,7 @@ class ControllerFleur {
 
          for($i = 0; $i < count($_SESSION['panier']['id']); $i++)
          {
-            if ($_SESSION['panier']['id'][$i] !== $maFleur->select($_GET['id']))
+            if ($_SESSION['panier']['id'][$i] !== $id)
             {
                array_push( $tmp['id'],$_SESSION['panier']['id'][$i]);
                array_push( $tmp['variete'],$_SESSION['panier']['variete'][$i]);
