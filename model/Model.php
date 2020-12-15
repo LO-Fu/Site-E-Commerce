@@ -74,12 +74,13 @@ class Model{
             $pkey = static::$primary;
             $values = array(":object" => static::$object);
             foreach($data as $clef => $value){
-                $sql = $sql."$clef=:$clef ";
+                $sql = $sql."$clef=:$clef, ";
                 $values[":".$clef] = $value;
             }
             $values[":".$pkey] = $values -> $pkey;
             var_dump($values);
             var_dump($sql);
+            var_dump($data);
             $req_prep = Model::$pdo->prepare($sql."WHERE `:object`.`$pkey`=:primary");
             $req_prep->execute($values);
 
