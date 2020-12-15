@@ -73,12 +73,10 @@ class Model{
             $sql = "UPDATE :object SET ";
             $pkey = static::$primary;
             $values = array(":object" => static::$object);
-            foreach ($data as $attribute) {
-                echo $attribute;
-                foreach ($attribute as $clef => $value) {
-                    $sql = $sql . "$clef=:$clef, ";
-                    $values[":" . $clef] = $value;
-                }
+            print_r($data);
+            foreach ($data as $clef => $value) {
+                $sql = $sql . "$clef=:$clef, ";
+                $values[":" . $clef] = $value;
             }
             $values[":".$pkey] = $values -> $pkey;
             var_dump($values);
