@@ -1,5 +1,5 @@
 <?php
-    foreach ($tab_v as $fleur){
+    foreach ($fleurs as $fleur){
         $gv=$fleur->get('variete');
         $gc=$fleur->get('couleur');
         $gp=$fleur->get('prix');

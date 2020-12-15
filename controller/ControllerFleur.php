@@ -8,7 +8,7 @@ class ControllerFleur {
         $controller='fleur';
         $view='list';
         $pagetitle='Liste de fleurs';
-        $tab_v = ModelFleur::selectAll();     //appel au modèle pour gerer la BD
+        $fleurs = ModelFleur::selectAll();     //appel au modèle pour gerer la BD
         require File::build_path(array("view","view.php"));  //"redirige" vers la vue
     }
 
@@ -59,6 +59,6 @@ class ControllerFleur {
         $view='updated';
         $pagetitle="Fleur mise à jour";
         $f=Array(htmlspecialchars($_GET['variete']), htmlspecialchars($_GET['couleur']));
-        require File::build_path(array("index.php?controller=fleur&action=readAll"));
+        require ("index.php?controller=fleur&action=readAll");
     }
 }
