@@ -30,30 +30,29 @@ class Model{
     }
 
     public static function select($primary_value) {
+        $table_name=static::$object;
+        $class_name='Model'.ucfirst($table_name);
+        $primary_key=static::$primary;
+        // In the query, put tags :xxx instead of variables $xxx
+        $sql = "SELECT * from ".$table_name." WHERE ".$primary_key."=:nom_tag";
+        // Prepare the SQL statement
+        $req_prep = Model::$pdo->prepare($sql);
 
-    $table_name=static::$object;
-    $class_name='Model'.ucfirst($table_name);
-    $primary_key=static::$primary;
-    // In the query, put tags :xxx instead of variables $xxx
-    $sql = "SELECT * from ".$table_name." WHERE ".$primary_key."=:nom_tag";
-    // Prepare the SQL statement
-    $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "nom_tag" => $primary_value,
+            //nomdutag => valeur, ...
+        );
+        // Execute the SQL prepared statement after replacing tags
+        // with the values given in $values
+        $req_prep->execute($values);
 
-    $values = array(
-        "nom_tag" => $primary_value,
-        //nomdutag => valeur, ...
-    );
-    // Execute the SQL prepared statement after replacing tags 
-    // with the values given in $values
-    $req_prep->execute($values);
-
-    // Retrieve results as previously
-    $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
-    $tab_voit = $req_prep->fetchAll();
-    // Careful: you should handle the special case of no results
-    if (empty($tab_voit))
-        return false;
-    return $tab_voit[0];
+        // Retrieve results as previously
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        $tab_voit = $req_prep->fetchAll();
+        // Careful: you should handle the special case of no results
+        if (empty($tab_voit))
+            return false;
+        return $tab_voit[0];
     }
 
     public static function delete($primary_value){
@@ -68,6 +67,45 @@ class Model{
 
         $req_prep->execute($values);
     }
+
+    public static function update($data){
+        try{
+            $sql = "UPDATE ".static::$object." SET ";
+            $pkey = static::$primary;
+            foreach ($data as $clef=> $value) {
+                if ($clef != $pkey){$sql = $sql . "$clef=:$clef, ";}
+                $values[":" . $clef] = $value;
+            }
+            $sql = rtrim($sql, " ,")." WHERE $pkey=:$pkey";
+            $req_prep = Model::$pdo->prepare($sql);
+            $req_prep->execute($values);
+
+        }catch(PDOException $e) {
+            echo $e->getMessage(); // affiche un message d'erreur
+            die();
+        }
+    }
+
+    public static function save($data){
+        try{
+            $corps = " (";
+            foreach ($data as $clef=> $value) {
+                $corps = $corps .':'.$clef.',';
+                $values[":" . $clef] = $value;
+            }
+            $corps = rtrim($corps,",").")";
+            $in = str_replace(':','',$corps);
+            $sql = "INSERT INTO ".static::$object.$in." VALUES".$corps;
+            $req_prep = Model::$pdo->prepare($sql);
+            $req_prep->execute($values);
+
+        }catch(PDOException $e) {
+            echo $e->getMessage(); // affiche un message d'erreur
+            die();
+        }
+    }
+
+
 }
 
 Model::Init();

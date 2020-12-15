@@ -5,19 +5,18 @@ class ControllerFleur {
 	protected static $object = 'fleur';
 
 	public static function readAll() {
-        $controller='fleur';
+        $controller=static::$object;
         $view='list';
         $pagetitle='Liste de fleurs';
-        $tab_v = ModelFleur::selectAll();     //appel au modèle pour gerer la BD
+        $fleurs = ModelFleur::selectAll();     //appel au modèle pour gerer la BD
         require File::build_path(array("view","view.php"));  //"redirige" vers la vue
     }
 
     public static function read(){
-        $controller='fleur';
-    	$p1 = $_GET['variete'];
-    	$p2 = $_GET['couleur'];
-    	$v = ModelFleur::select($p1,$p2);
-        $pagetitle=$p1.$p2;
+        $controller=static::$object;
+    	$idFleur = $_GET['id'];
+    	$v = ModelFleur::select($idFleur);
+        $pagetitle=$idFleur;
     	if($v==NULL) {
             $view='error';
             require File::build_path(array("view","view.php"));
@@ -26,5 +25,59 @@ class ControllerFleur {
             $view='detail';
             require File::build_path(array("view","view.php"));   
             } 
+    }
+
+    public static function create(){
+        $controller=static::$object;
+        $view='update';
+        $event = "created";
+        $primaryAction = "required";
+        $pagetitle="Création de fleur";
+        $idFleur='';
+        $f = new ModelFleur();
+        require File::build_path(array("view","view.php"));
+    }
+
+    public static function created(){
+        $fleur = new ModelFleur($_GET['variete'],$_GET['couleur'],$_GET['prix'], $_GET['identifiant']);
+        ModelFleur::save($fleur);
+        $controller= static::$object;
+        $view='created';
+        $pagetitle="Fleur créée";
+        $fleurs = ModelFleur::selectAll();
+        $id = htmlspecialchars($_GET['identifiant']);
+        require File::build_path(array("view","view.php"));
+    }
+
+    public static function update(){
+        $controller=static::$object;
+        $idFleur = $_GET['id'];
+        $f = ModelFleur::select($idFleur);
+        $pagetitle="Modification de fleur";
+        $primaryAction = "readonly";
+        $event = "updated";
+        $view='update';
+        require File::build_path(array("view","view.php"));
+    }
+
+    public static function updated(){
+        $fleur = new ModelFleur($_GET['variete'],$_GET['couleur'],$_GET['prix'], $_GET['identifiant']);
+        ModelFleur::update($fleur);
+        $controller=static::$object;
+        $view='updated';
+        $pagetitle="Fleur mise à jour";
+        $f=Array(htmlspecialchars($_GET['variete']), htmlspecialchars($_GET['couleur']));
+        $fleurs = ModelFleur::selectAll();
+        require File::build_path(array("view","view.php"));
+    }
+
+    public static function delete(){
+        ModelFleur::delete($_GET["id"]);
+        $id=htmlspecialchars($_GET["id"]);
+        $fleurs=ModelFleur::selectAll();
+        $controller=static::$object;
+        $view='deleted';
+        $pagetitle="Supprimer voiture";
+        require File::build_path(array("view","view.php"));
     }
 }
