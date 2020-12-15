@@ -78,7 +78,7 @@ class Model{
                 if ($clef != $pkey){$sql = $sql . "$clef=:$clef, ";}
                 $values[":" . $clef] = $value;
             }
-            $sql = substr($sql, 0, -2)." WHERE :object $pkey=:$pkey";
+            $sql = substr($sql, 0, -2)." WHERE $pkey=:$pkey";
             print_r($sql);
             $req_prep = Model::$pdo->prepare($sql);
             $req_prep->execute($values);
