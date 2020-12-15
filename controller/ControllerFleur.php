@@ -129,6 +129,7 @@ class ControllerFleur {
          $positionProduit = array_search($_GET['id'],  $_SESSION['panier']['id']);
          $maFleur=ModelFleur::select($_GET['id']);
          $controller=static::$object;
+        $view='panier';
 
          if ($positionProduit !== false)
          {
@@ -143,7 +144,7 @@ class ControllerFleur {
             array_push( $_SESSION['panier']['qte'],1);
             array_push( $_SESSION['panier']['prix'],$maFleur->get('prix'));
          }
-         require File::build_path(array("view","fleur","panier.php"));
+        require File::build_path(array("view","view.php"));
    }
 
    public static function modifierQte(){
@@ -197,7 +198,7 @@ class ControllerFleur {
    public static function total(){
         $total = 0;
         foreach ($_SESSION['panier']['id'] as $product){
-            $total = $total + $_SESSION['panier']['qte'][key($product)]*$_SESSION['panier']['prix'][key($product)];
+            $total = $total + $_SESSION['panier']['qte'][array_search($product,  $_SESSION['panier']['id'])]*$_SESSION['panier']['prix'][array_search($product,  $_SESSION['panier']['id'])];
         }
         return $total;
    }
