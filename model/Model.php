@@ -75,9 +75,7 @@ class Model{
             $infos = get_object_vars($data);
             $values = array(":object" => static::$object);
             foreach ($infos as $clef=> $value) {
-                echo $clef;
-                echo $value;
-                $sql = $sql . "$clef=:$clef, ";
+                if ($clef != $pkey){$sql = $sql . "$clef=:$clef, ";}
                 $values[":" . $clef] = $value;
             }
             $sql = substr($sql, 0, -2);
