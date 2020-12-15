@@ -1,4 +1,6 @@
 <?php
     foreach($_SESSION['panier'] as $attribute){
-        echo $attribute;
+        foreach ($attribute as $key => $value){
+            echo $value;
+        }
     }
