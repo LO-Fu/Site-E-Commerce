@@ -72,13 +72,13 @@ class Model{
         try{
             $sql = "UPDATE :object SET ";
             $pkey = static::$primary;
-            $values = array(":objet" => static::$object);
+            $values = array(":object" => static::$object);
             foreach($data as $clef => $value){
                 $sql = $sql."$clef=:$clef ";
-                $values[$clef] = $value;
+                $values[":".$clef] = $value;
             }
             $values[":".$pkey] = $values -> $pkey;
-            $req_prep = Model::$pdo->prepare($sql."WHERE `:object`.`static::$primary`=:primary");
+            $req_prep = Model::$pdo->prepare($sql."WHERE `:object`.`$pkey`=:primary");
             $req_prep->execute($values);
 
         }catch(PDOException $e) {
