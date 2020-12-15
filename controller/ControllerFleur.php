@@ -44,6 +44,8 @@ class ControllerFleur {
         $controller= static::$object;
         $view='created';
         $pagetitle="Fleur créée";
+        $fleurs = ModelFleur::selectAll();
+        $id = htmlspecialchars($_GET['identifiant']);
         require File::build_path(array("view","view.php"));
     }
 
