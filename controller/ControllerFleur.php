@@ -129,6 +129,7 @@ class ControllerFleur {
          $positionProduit = array_search($_GET['id'],  $_SESSION['panier']['id']);
          $maFleur=ModelFleur::select($_GET['id']);
          $controller=static::$object;
+         $view='panier';
 
          if ($positionProduit !== false)
          {
@@ -143,6 +144,7 @@ class ControllerFleur {
             array_push( $_SESSION['panier']['qte'],1);
             array_push( $_SESSION['panier']['prix'],$maFleur->get('prix'));
          }
+        require File::build_path(array("view","view.php"));
    }
 
    public static function modifierQte($qte){
@@ -194,15 +196,22 @@ class ControllerFleur {
          unset($tmp);
    }
 
-   public static function MontantGlobal(){
-      $total=0;
-      for($i = 0; $i < count($_SESSION['panier']['id']); $i++)
-      {
+   public static function total(){
+       $total = 0;
+       for($i = 0; $i < count($_SESSION['panier']['id']); $i++)
+        {
          $total += $_SESSION['panier']['qte'][$i] * $_SESSION['panier']['prix'][$i];
-      }
-      return $total;
+        }
+        return $total;
    }
 
+    public static function printPanier(){
+        $controller=static::$object;
+        $view='panier';
+        $pagetitle = "Mon super panier";
+        require File::build_path(array("view","view.php"));
+    }
+  
    public static function supprimePanier(){
       unset($_SESSION['panier']);
    }

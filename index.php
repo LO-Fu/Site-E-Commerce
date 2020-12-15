@@ -9,7 +9,7 @@ setCookie("panier[qte]", 0);*/
 if (isset($_COOKIE['panier'])) array_push($_SESSION['panier'], $_COOKIE['panier']);
 
 echo var_dump($_SESSION['panier']);*/
-
+session_start();
 if (!isset($_SESSION['panier'])){
          $_SESSION['panier']=array();
          $_SESSION['panier']['id'] = array();
