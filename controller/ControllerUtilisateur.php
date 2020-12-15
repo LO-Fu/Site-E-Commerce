@@ -54,8 +54,8 @@ class ControllerUtilisateur {
         ModelUtilisateur::save($utilisateur);
         $controller= static::$object;
         $view='created';
-        $pagetitle="utilisateur créé";
-        $utilisateurs = ModelUtilisateur::selectAll();
+        $pagetitle="Utilisateur créé";
+        $tab_v = ModelUtilisateur::selectAll();
         $login = htmlspecialchars($_GET['login']);
         require File::build_path(array("view","view.php"));
     }
@@ -78,7 +78,7 @@ class ControllerUtilisateur {
         $view='updated';
         $pagetitle="Utilisateur mise à jour";
         $u=Array(htmlspecialchars($_GET['variete']), htmlspecialchars($_GET['couleur']));
-        $utilisateurs = ModelUtilisateur::selectAll();
+        $tab_v = ModelUtilisateur::selectAll();
         require File::build_path(array("view","view.php"));
     }
 
