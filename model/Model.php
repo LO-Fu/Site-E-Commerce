@@ -81,6 +81,7 @@ class Model{
                 $values[":" . $clef] = $value;
             }
             $sql = substr($sql, 0, -2);
+            print_r($sql);
             $req_prep = Model::$pdo->prepare($sql." WHERE `:object`.`$pkey`=:$pkey");
             $req_prep->execute($values);
 
