@@ -203,4 +203,8 @@ class ControllerFleur {
         return $total;
    }
 
+    public static function printPanier(){
+        require File::build_path(array("view","fleur","panier.php"));
+    }
+
 }

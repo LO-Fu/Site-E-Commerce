@@ -23,6 +23,7 @@
             <li><a href="index.php?controller=accueil&action=readAll">Accueil</a></li>
             <li><a href="index.php?controller=fleur&action=readAll">Produits</a></li>
             <li><a href="index.php?controller=contact&action=readAll">Contact</a></li>
+              <li><a href="index.php?controller=fleur&action=printPanier">Panier</a></li>
           </ul>
         </nav>
       </header>
