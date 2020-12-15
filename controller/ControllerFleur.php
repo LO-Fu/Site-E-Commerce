@@ -59,6 +59,7 @@ class ControllerFleur {
         $view='updated';
         $pagetitle="Fleur mise à jour";
         $f=Array(htmlspecialchars($_GET['variete']), htmlspecialchars($_GET['couleur']));
+        $fleurs = ModelFleur::selectAll();
         require File::build_path(array("view","view.php"));
     }
 }
