@@ -73,12 +73,11 @@ class Model{
             $sql = "UPDATE ".static::$object." SET ";
             $pkey = static::$primary;
             $infos = get_object_vars($data);
-            foreach ($infos as $clef=> $value) {
+            foreach ($data as $clef=> $value) {
                 if ($clef != $pkey){$sql = $sql . "$clef=:$clef, ";}
                 $values[":" . $clef] = $value;
             }
             $sql = substr($sql, 0, -2)." WHERE $pkey=:$pkey";
-            print_r($sql);
             $req_prep = Model::$pdo->prepare($sql);
             $req_prep->execute($values);
 
