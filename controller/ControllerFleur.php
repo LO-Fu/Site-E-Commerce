@@ -30,6 +30,7 @@ class ControllerFleur {
     public static function create(){
         $controller='fleur';
         $view='create';
+        $primaryAction = "required";
         $pagetitle="Création de fleur";
         require File::build_path(array("view","view.php"));
     }
@@ -48,6 +49,7 @@ class ControllerFleur {
         $idFleur = $_GET['id'];
         $f = ModelFleur::select($idFleur);
         $pagetitle="Modification de fleur";
+        $primaryAction = "readonly";
         $view='update';
         require File::build_path(array("view","view.php"));
     }
