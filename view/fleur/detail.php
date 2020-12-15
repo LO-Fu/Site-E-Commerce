@@ -12,6 +12,6 @@
     echo "<p> La fleur de la variété $g11, à la couleur $g21 coûte $g31 €.<a href='index.php?controller=fleur&action=delete&id=$g22'>		supprimer </a> <a href='index.php?controller=fleur&action=update&id=$g22'>		modifier</a></p>";
     echo "<img class='img_galerie' src='../site-e-commerce/img/fleurs/$g1/$f.jpg' />";
     echo "<div><a href='index.php?controller=fleur&action=ajouterArticle&id=$g22'> Ajouter au panier </a></div>";
-    echo "<td>".htmlspecialchars($_SESSION['panier']['id'][$g4])."</ td>";
-    echo "<td>".htmlspecialchars($_SESSION['panier']['qte'])."</td>";
+    /*echo "<td>".htmlspecialchars($_SESSION['panier']['id'][$g4])."</ td>";
+    echo "<td>".htmlspecialchars($_SESSION['panier']['qte'])."</td>";*/
 ?>
