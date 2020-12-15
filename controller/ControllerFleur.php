@@ -129,7 +129,7 @@ class ControllerFleur {
          $positionProduit = array_search($_GET['id'],  $_SESSION['panier']['id']);
          $maFleur=ModelFleur::select($_GET['id']);
          $controller=static::$object;
-        $view='panier';
+         $view='panier';
 
          if ($positionProduit !== false)
          {
@@ -204,7 +204,10 @@ class ControllerFleur {
    }
 
     public static function printPanier(){
-        require File::build_path(array("view","fleur","panier.php"));
+        $controller=static::$object;
+        $view='panier';
+        $pagetitle = "Mon super panier";
+        require File::build_path(array("view","view.php"));
     }
 
 }
