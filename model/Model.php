@@ -72,7 +72,6 @@ class Model{
         try{
             $sql = "UPDATE ".static::$object." SET ";
             $pkey = static::$primary;
-            $infos = get_object_vars($data);
             foreach ($data as $clef=> $value) {
                 if ($clef != $pkey){$sql = $sql . "$clef=:$clef, ";}
                 $values[":" . $clef] = $value;
