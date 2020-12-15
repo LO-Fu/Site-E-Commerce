@@ -39,8 +39,8 @@ class ControllerFleur {
     }
 
     public static function created(){
-        $fleur = new ModelVoiture($_GET['variete'],$_GET['couleur'],$_GET['prix']);
-        $fleur->save();
+        $fleur = new ModelFleur($_GET['variete'],$_GET['couleur'],$_GET['prix'], $_GET['identifiant']);
+        ModelFleur::save($fleur);
         $controller= static::$object;
         $view='created';
         $pagetitle="Fleur créée";

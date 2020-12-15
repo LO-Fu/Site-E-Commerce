@@ -93,7 +93,7 @@ class Model{
                 $corps = $corps .':'.$clef.',';
                 $values[":" . $clef] = $value;
             }
-            $corps = substr($sql, 0, -1).")";
+            $corps = substr($corps, 0, -1).")";
             $in = rtrim($corps, ":");
             $sql = "INSERT INTO ".static::$object.$in." VALUES".$corps;
             var_dump($sql);
