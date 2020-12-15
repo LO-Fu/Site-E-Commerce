@@ -74,9 +74,9 @@ class Model{
             $pkey = static::$primary;
             $values = array(":object" => static::$object);
             print_r($data);
-            foreach ($data as $clef => $value) {
-                $sql = $sql . "$clef=:$clef, ";
-                $values[":" . $clef] = $value;
+            foreach ($data as $clef[0] => $value) {
+                $sql = $sql . "$clef[0]=:$clef[0], ";
+                $values[":" . $clef[0]] = $value;
             }
             $values[":".$pkey] = $values -> $pkey;
             var_dump($values);
