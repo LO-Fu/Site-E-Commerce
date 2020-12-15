@@ -64,7 +64,7 @@ class ModelFleur extends Model
 
     public static function update($data){
         try{
-            $sql = "UPDATE fleur SET prix =:prix AND variete=:variete AND couleur=:couleur WHERE id=:id";
+            $sql = "UPDATE fleur SET prix =:prix, variete=:variete, couleur=:couleur WHERE id=:id";
             $req_prep = Model::$pdo->prepare($sql);
 
             $values = array(
