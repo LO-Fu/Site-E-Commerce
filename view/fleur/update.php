@@ -29,7 +29,7 @@ $prix = htmlspecialchars($f->get('prix'));
         <p>
             <input type="submit" value="Envoyer" />
             <input type='hidden' name='controller' value='fleur'/>
-            <input type='hidden' name='action' value="<?php echo $view. 'd'?>"/>
+            <input type='hidden' name='action' value="<?php echo $event?>"/>
         </p>
     </fieldset>
 </form>
