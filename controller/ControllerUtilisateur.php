@@ -112,7 +112,7 @@ class ControllerUtilisateur
         $login = htmlspecialchars($_GET['login']);
         if (ModelUtilisateur::checkPassword($login, Security::hacher(htmlspecialchars($_GET['mdp'])))) {
             $_SESSION['login'] = $login;
-            if (Model::select($login)->get('admin')) {
+            if (ModelUtilisateur::select($login)->get('admin')) {
                 $_SESSION['admin'] = true;
             }
             self::read();
