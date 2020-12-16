@@ -42,5 +42,20 @@ class ModelUtilisateur extends Model{
         return $rep->fetchAll();
     }
 
+    public static function checkPassword($login,$mot_de_passe_hache){
+        $rep = Model::$pdo->query("SELECT mdp FROM utilisateur WHERE login =:login");
+        $req_prep = Model::$pdo->prepare($rep);
+        $values = array(
+          ':login' => $login
+        );
+        $req_prep->execute($values);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+        $mdp = $req_prep->fetchAll();
+        if ($mdp == $mot_de_passe_hache){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
 }
