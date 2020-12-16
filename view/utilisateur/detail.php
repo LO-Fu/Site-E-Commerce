@@ -8,7 +8,7 @@
 	$g12=rawurlencode($g1);
 
     echo "<p> L'utilisateur au login $g11, qui s'appelle $g21 $g31</p>";
-    if(Session::is_user("hugod")){
+    if(Session::is_admin()){
         echo "<a href='index.php?controller=utilisateur&action=delete&login=$g12'>		supprimer </a>";
         echo "<a href='index.php?controller=utilisateur&action=update&login=$g12'>		modifier</a>";
     }

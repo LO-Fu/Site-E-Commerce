@@ -39,13 +39,15 @@ class ControllerFleur {
     }
 
     public static function created(){
-        $fleur = new ModelFleur($_GET['variete'],$_GET['couleur'],$_GET['prix'], $_GET['identifiant']);
-        ModelFleur::save($fleur);
-        $controller= static::$object;
-        $view='created';
-        $pagetitle="Fleur créée";
-        $fleurs = ModelFleur::selectAll();
-        $id = htmlspecialchars($_GET['identifiant']);
+        if(Session::is_admin()) {
+            $fleur = new ModelFleur($_GET['variete'], $_GET['couleur'], $_GET['prix'], $_GET['identifiant']);
+            ModelFleur::save($fleur);
+            $controller = static::$object;
+            $view = 'created';
+            $pagetitle = "Fleur créée";
+            $fleurs = ModelFleur::selectAll();
+            $id = htmlspecialchars($_GET['identifiant']);
+        }
         require File::build_path(array("view","view.php"));
     }
 
@@ -61,23 +63,27 @@ class ControllerFleur {
     }
 
     public static function updated(){
-        $fleur = new ModelFleur($_GET['variete'],$_GET['couleur'],$_GET['prix'], $_GET['identifiant']);
-        ModelFleur::update($fleur);
-        $controller=static::$object;
-        $view='updated';
-        $pagetitle="Fleur mise à jour";
-        $f=Array(htmlspecialchars($_GET['variete']), htmlspecialchars($_GET['couleur']));
-        $fleurs = ModelFleur::selectAll();
+        if(Session::is_admin()) {
+            $fleur = new ModelFleur($_GET['variete'], $_GET['couleur'], $_GET['prix'], $_GET['identifiant']);
+            ModelFleur::update($fleur);
+            $controller = static::$object;
+            $view = 'updated';
+            $pagetitle = "Fleur mise à jour";
+            $f = array(htmlspecialchars($_GET['variete']), htmlspecialchars($_GET['couleur']));
+            $fleurs = ModelFleur::selectAll();
+        }
         require File::build_path(array("view","view.php"));
     }
 
     public static function delete(){
-        ModelFleur::delete($_GET["id"]);
-        $id=htmlspecialchars($_GET["id"]);
-        $fleurs=ModelFleur::selectAll();
-        $controller=static::$object;
-        $view='deleted';
-        $pagetitle="Supprimer voiture";
+        if(Session::is_admin()) {
+            ModelFleur::delete($_GET["id"]);
+            $id = htmlspecialchars($_GET["id"]);
+            $fleurs = ModelFleur::selectAll();
+            $controller = static::$object;
+            $view = 'deleted';
+            $pagetitle = "Supprimer voiture";
+        }
         require File::build_path(array("view","view.php"));
     }
 

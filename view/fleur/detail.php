@@ -10,7 +10,7 @@
 	$f=$g1.$g2;
 
     echo "<p> La fleur de la variété $g11, à la couleur $g21 coûte $g31 € </p>";
-    if(Session::is_user("hugod")){
+    if(Session::is_admin()){
         echo "<a href='index.php?controller=fleur&action=delete&id=$g22'>		supprimer </a>";
         echo "<a href='index.php?controller=fleur&action=update&id=$g22'>		modifier</a>";
     }
