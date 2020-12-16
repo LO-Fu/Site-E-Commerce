@@ -10,7 +10,6 @@ if (isset($_COOKIE['panier'])) array_push($_SESSION['panier'], $_COOKIE['panier'
 
 echo var_dump($_SESSION['panier']);*/
 session_start();
-require_once (File::build_path(array("lib","Session.php")));
 if (!isset($_SESSION['panier'])){
          $_SESSION['panier']=array();
          $_SESSION['panier']['id'] = array();
@@ -38,5 +37,6 @@ if (isset($_GET["ajout"])) {
 
 $DS = DIRECTORY_SEPARATOR;
 require __DIR__ . $DS . "/lib/File.php" ;
+require_once (File::build_path(array("lib","Session.php")));
 require_once File::build_path(array("controller","routeur.php"));
 ?>
