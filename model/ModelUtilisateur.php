@@ -10,6 +10,7 @@ class ModelUtilisateur extends Model{
     protected $nom;
     protected $prenom;
     protected $mdp;
+    protected $admin;
 
     // Getter générique (pas expliqué en TD)
     public function get($nom_attribut) {
@@ -26,12 +27,13 @@ class ModelUtilisateur extends Model{
     }
 
     // un constructeur
-    public function __construct($login = NULL, $nom = NULL, $prenom = NULL, $mdp = NULL) {
-        if (!is_null($login) && !is_null($nom) && !is_null($prenom) && !is_null($mdp)) {
+    public function __construct($login = NULL, $nom = NULL, $prenom = NULL, $mdp = NULL, $admin = NULL) {
+        if (!is_null($login) && !is_null($nom) && !is_null($prenom) && !is_null($mdp) && !is_null($admin)) {
             $this->login = $login;
             $this->nom = $nom;
             $this->prenom = $prenom;
             $this->mdp = $mdp;
+            $this->admin = $admin;
         }
     }
 
@@ -43,19 +45,20 @@ class ModelUtilisateur extends Model{
     }
 
     public static function checkPassword($login,$mot_de_passe_hache){
-        $rep = Model::$pdo->query("SELECT mdp FROM utilisateur WHERE login =:login");
+        $rep = "SELECT mdp FROM utilisateur WHERE login =:login";
         $req_prep = Model::$pdo->prepare($rep);
         $values = array(
-          ':login' => $login
+          'login' => $login
         );
         $req_prep->execute($values);
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
-        $mdp = $req_prep->fetchAll();
-        if ($mdp == $mot_de_passe_hache){
-            return true;
-        }else{
-            return false;
+        $u = $req_prep->fetchAll();
+        if(!empty($u)) {
+            $mdp = $u[0]->get('mdp');
+            if ($mdp == $mot_de_passe_hache) {
+                return true;
+            }
         }
+        return false;
     }
-    
 }

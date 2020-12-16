@@ -33,14 +33,17 @@ class ControllerUtilisateur
 
     public static function delete()
     {
-        $p = $_GET["login"];
-        ModelUtilisateur::delete($p);
-        $p = htmlspecialchars($p);
-        $tab_v = ModelUtilisateur::selectAll();
-        $controller = static::$object;
-        $view = 'deleted';
-        $pagetitle = "Supprimer utilisateur";
+        if (Session::is_admin()) {
+            $p = $_GET["login"];
+            ModelUtilisateur::delete($p);
+            $p = htmlspecialchars($p);
+            $tab_v = ModelUtilisateur::selectAll();
+            $controller = static::$object;
+            $view = 'deleted';
+            $pagetitle = "Supprimer utilisateur";
+        }
         require File::build_path(array("view", "view.php"));
+
     }
 
     public static function create()
@@ -57,14 +60,17 @@ class ControllerUtilisateur
 
     public static function created()
     {
-        $utilisateur = new ModelUtilisateur($_GET['login'], $_GET['nom'], $_GET['prenom'], Security::hacher($_GET['mdp']));
-        ModelUtilisateur::save($utilisateur);
-        $controller = static::$object;
-        $view = 'created';
-        $pagetitle = "Utilisateur créé";
-        $tab_v = ModelUtilisateur::selectAll();
-        $login = htmlspecialchars($_GET['login']);
+        if (Session::is_admin()) {
+            $utilisateur = new ModelUtilisateur($_GET['login'], $_GET['nom'], $_GET['prenom'], Security::hacher($_GET['mdp']), false);
+            ModelUtilisateur::save($utilisateur);
+            $controller = static::$object;
+            $view = 'created';
+            $pagetitle = "Utilisateur créé";
+            $tab_v = ModelUtilisateur::selectAll();
+            $login = htmlspecialchars($_GET['login']);
+        }
         require File::build_path(array("view", "view.php"));
+
     }
 
     public static function update()
@@ -81,13 +87,16 @@ class ControllerUtilisateur
 
     public static function updated()
     {
-        $utilisateur = new ModelUtilisateur($_GET['login'], $_GET['nom'], $_GET['prenom'], Security::hacher($_GET['mdp']));
-        ModelUtilisateur::update($utilisateur);
-        $controller = static::$object;
-        $view = 'updated';
-        $pagetitle = "Utilisateur mise à jour";
-        $tab_v = ModelUtilisateur::selectAll();
+        if (Session::is_admin()) {
+            $utilisateur = new ModelUtilisateur($_GET['login'], $_GET['nom'], $_GET['prenom'], Security::hacher($_GET['mdp']));
+            ModelUtilisateur::update($utilisateur);
+            $controller = static::$object;
+            $view = 'updated';
+            $pagetitle = "Utilisateur mise à jour";
+            $tab_v = ModelUtilisateur::selectAll();
+        }
         require File::build_path(array("view", "view.php"));
+
     }
 
     public static function connect()
@@ -101,10 +110,25 @@ class ControllerUtilisateur
     public static function connected()
     {
         $login = htmlspecialchars($_GET['login']);
-        if(ModelUtilisateur::checkPassword($login,Security::hacher(htmlspecialchars($_GET['mdp'])))){
+        if (ModelUtilisateur::checkPassword($login, Security::hacher(htmlspecialchars($_GET['mdp'])))) {
             $_SESSION['login'] = $login;
+            if (ModelUtilisateur::select($login)->get('admin')) {
+                $_SESSION['admin'] = true;
+            }
             self::read();
+        } else {
+            header('Location: index.php');
         }
+
+    }
+
+    public static function deconnect()
+    {
+        if (isset($_SESSION['login'])) {
+            session_unset();
+            session_destroy();
+        }
+        header('Location: index.php');
     }
 }
 

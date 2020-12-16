@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <body>
 <form method="get" action="index.php">
