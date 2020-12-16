@@ -105,7 +105,7 @@ class ControllerUtilisateur
             $_SESSION['login'] = $login;
             self::read();
         }else{
-            require (File::build_path(array("index.php")));
+            require File::build_path(array("view", "view.php"));
         }
     }
 }
