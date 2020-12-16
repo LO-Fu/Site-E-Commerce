@@ -101,12 +101,21 @@ class ControllerUtilisateur
     public static function connected()
     {
         $login = htmlspecialchars($_GET['login']);
-        if(ModelUtilisateur::checkPassword($login,Security::hacher(htmlspecialchars($_GET['mdp'])))){
+        if (ModelUtilisateur::checkPassword($login, Security::hacher(htmlspecialchars($_GET['mdp'])))) {
             $_SESSION['login'] = $login;
             self::read();
-        }else{
-            require File::build_path(array("view", "view.php"));
+        } else {
+            header('Location: index.php');
         }
+    }
+
+    public static function deconnect()
+    {
+        if(isset($_SESSION['login'])){
+            session_unset();
+            session_destroy();
+        }
+            header('Location: index.php');
     }
 }
 
