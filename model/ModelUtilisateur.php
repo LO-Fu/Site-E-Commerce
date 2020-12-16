@@ -52,6 +52,7 @@ class ModelUtilisateur extends Model{
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
         $u = $req_prep->fetch();
         $mdp = $u[0]->get('mdp');
+        var_dump($mdp);
         if ($mdp == $mot_de_passe_hache){
             return true;
         }else{
