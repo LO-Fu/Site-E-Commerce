@@ -107,9 +107,9 @@ class ControllerUtilisateur
         } else {
             header('Location: index.php');
         }
-        if (Model::select($login)->get('admin')){
+        /*if (Model::select($login)->get('admin')){
 
-        }
+        }*/
     }
 
     public static function deconnect()
