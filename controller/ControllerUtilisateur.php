@@ -111,7 +111,7 @@ class ControllerUtilisateur
 
     public static function deconnect()
     {
-        if(empty($_SESSION['login'])){
+        if(isset($_SESSION['login'])){
             session_unset();
             session_destroy();
         }

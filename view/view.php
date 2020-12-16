@@ -25,8 +25,8 @@
             <li><a href="index.php?controller=utilisateur&action=readAll">Utilisateurs</a></li>
             <li><a href="index.php?controller=contact&action=readAll">Contact</a></li>
             <li><a href="index.php?controller=fleur&action=printPanier">Panier</a></li>
-            <?php if(!empty($_SESSION['login'])){echo "<li><a href=\"index.php?controller=utilisateur&action=connect\">Se connecter</a></li>";} ?>
-            <?php if(empty($_SESSION['login'])){echo "<li><a href=\"index.php?controller=utilisateur&action=deconnect\">Se deconnecter</a></li>";} ?>
+            <?php if(!isset($_SESSION['login'])){echo "<li><a href=\"index.php?controller=utilisateur&action=connect\">Se connecter</a></li>";} ?>
+            <?php if(isset($_SESSION['login'])){echo "<li><a href=\"index.php?controller=utilisateur&action=deconnect\">Se deconnecter</a></li>";} ?>
           </ul>
         </nav>
       </header>
