@@ -43,7 +43,7 @@ class ModelUtilisateur extends Model{
     }
 
     public static function checkPassword($login,$mot_de_passe_hache){
-        $rep = Model::$pdo->query("SELECT mdp FROM utilisateur WHERE login =:login");
+        $rep = "SELECT mdp FROM utilisateur WHERE login =:login";
         $req_prep = Model::$pdo->prepare($rep);
         $values = array(
           'login' => $login
@@ -57,5 +57,4 @@ class ModelUtilisateur extends Model{
             return false;
         }
     }
-    
 }
