@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form method="post" action="panier.php">
+<form method="post" action="index.php?controller=fleur&action=printPanier">
     <table style="width: 400px">
         <tr>
             <td colspan="4">Votre panier</td>
@@ -41,8 +41,9 @@
                 echo "</td></tr>";
 
                 echo "<tr><td colspan=\"4\">";
-                //echo "<input type=\"submit\" value=\"Rafraichir\"/>";
-                //echo "<input type=\"hidden\" name=\"action\" value=\"refresh\"/>";
+
+                echo "<input type=\"submit\" value=\"Rafraichir\"/>";
+                echo "<input type=\"hidden\" name=\"action\" value=\"refresh\"/>";
 
                 echo "</td></tr>";
             }

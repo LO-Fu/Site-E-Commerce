@@ -7,16 +7,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../img/icones/fleur.ico" rel="icon" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="../site-e-commerce/css/stylesDivers.css">
-    <link rel="stylesheet" type="text/css" href="../site-e-commerce/css/stylesBaniere.css">
-    <link rel="stylesheet" type="text/css" href="../site-e-commerce/css/stylesMenu.css">
-    <link rel="stylesheet" type="text/css" href="../site-e-commerce/css/stylesGalerie.css">
+    <link rel="stylesheet" type="text/css" href="../eCommerce/css/stylesDivers.css">
+    <link rel="stylesheet" type="text/css" href="../eCommerce/css/stylesBaniere.css">
+    <link rel="stylesheet" type="text/css" href="../eCommerce/css/stylesMenu.css">
+    <link rel="stylesheet" type="text/css" href="../eCommerce/css/stylesGalerie.css">
         <title><?php echo $pagetitle; ?></title>
     </head>
     <body>
     	<header>
         <div id="baniere">
-            <img class="img_baniere" alt="baniere" src="../site-e-commerce/img/baniere/baniere1.jpg">
+            <img class="img_baniere" alt="baniere" src="../eCommerce/img/baniere/baniere1.jpg">
         </div>
         <nav>
           <ul>

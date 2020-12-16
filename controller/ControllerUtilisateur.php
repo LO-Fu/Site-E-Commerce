@@ -1,5 +1,6 @@
 <?php
 require_once File::build_path(array("model","ModelUtilisateur.php")); // chargement du modèle
+require_once File::build_path(array("lib","Security.php"));
 class ControllerUtilisateur {
 
 	protected static $object = 'utilisateur';
@@ -50,7 +51,7 @@ class ControllerUtilisateur {
     }
 
     public static function created(){
-        $utilisateur = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'], $_GET['mdp']);
+        $utilisateur = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'], Security::hacher($_GET['mdp']));
         ModelUtilisateur::save($utilisateur);
         $controller= static::$object;
         $view='created';
@@ -72,12 +73,11 @@ class ControllerUtilisateur {
     }
 
     public static function updated(){
-        $utilisateur = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'], $_GET['mdp']);
+        $utilisateur = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'], Security::hacher($_GET['mdp']));
         ModelUtilisateur::update($utilisateur);
         $controller=static::$object;
         $view='updated';
         $pagetitle="Utilisateur mise à jour";
-        $u=Array(htmlspecialchars($_GET['variete']), htmlspecialchars($_GET['couleur']));
         $tab_v = ModelUtilisateur::selectAll();
         require File::build_path(array("view","view.php"));
     }
