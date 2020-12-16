@@ -57,7 +57,7 @@ class ControllerUtilisateur
 
     public static function created()
     {
-        $utilisateur = new ModelUtilisateur($_GET['login'], $_GET['nom'], $_GET['prenom'], Security::hacher($_GET['mdp']));
+        $utilisateur = new ModelUtilisateur($_GET['login'], $_GET['nom'], $_GET['prenom'], Security::hacher($_GET['mdp']), false);
         ModelUtilisateur::save($utilisateur);
         $controller = static::$object;
         $view = 'created';
@@ -106,6 +106,9 @@ class ControllerUtilisateur
             self::read();
         } else {
             header('Location: index.php');
+        }
+        if (Model::select($login)->get('admin')){
+
         }
     }
 
