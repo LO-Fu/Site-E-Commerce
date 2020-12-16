@@ -104,6 +104,8 @@ class ControllerUtilisateur
         if(ModelUtilisateur::checkPassword($login,Security::hacher(htmlspecialchars($_GET['mdp'])))){
             $_SESSION['login'] = $login;
             self::read();
+        }else{
+            require (File::build_path(array("index.php")));
         }
     }
 }

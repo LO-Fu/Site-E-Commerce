@@ -51,6 +51,7 @@ class ModelUtilisateur extends Model{
         $req_prep->execute($values);
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
         $mdp = $req_prep->fetchAll();
+        echo $mdp;
         if ($mdp == $mot_de_passe_hache){
             return true;
         }else{
